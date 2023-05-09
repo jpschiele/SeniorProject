@@ -1,3 +1,4 @@
+# Function created to take the name of a conference and return a list of all teams in that conference
 def get_teams(conference):
     if conference == 'ACC':
         return ['boston-college', 'clemson', 'duke', 'florida-state', 'georgia-tech',

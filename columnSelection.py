@@ -6,6 +6,9 @@ from firestoreClient import client_setup
 from confTeams import get_teams
 import warnings
 
+# columnSelection.py uses feature selection to determine the five most influential features in determining predicted
+# values. Predictions for the result of the game are left in for example.
+
 warnings.filterwarnings('ignore')
 
 # Creates connection with Firestore Database

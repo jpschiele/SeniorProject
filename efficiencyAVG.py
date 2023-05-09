@@ -1,7 +1,11 @@
 from confTeams import get_teams
 from firestoreClient import client_setup
 
-# Fetch the service account key JSON file path and database URL from environment variables
+# efficiencyAVG.py takes an average of all efficiency ratings for a season and adds those values as a new document
+# in the Firestore Database. This creates an end of season efficiency rating for each team to use when predicting
+# conference tournament results.
+
+# Creates connection to Firestore Database
 db = client_setup()
 
 # Specify conference

@@ -12,6 +12,11 @@ from firestoreClient import client_setup
 from confTeams import get_teams
 import warnings
 
+# Model.py is the logistic and linear regression models used for score predictions and win probability predictions.
+# It provided MSE for the linear regression and accuracy for the logistic regression.
+# Current MSE in Database: 102.65
+# Current accuracy in Database: .9245
+
 warnings.filterwarnings('ignore')
 
 # Used to replace any nan values with the average

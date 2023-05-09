@@ -1,25 +1,26 @@
-import firebase_admin
 from confTeams import get_teams
 from firestoreClient import client_setup
 
-# CHANGE STAT TO BE AVERAGED AND NAME OF NEW COLUMN
-stat_dict = {'TRBOpp': 'L3TRBOpp', '3P%': 'L33PPer',
-             '3P%Opp': 'L33PPerOpp', 'FG%': 'L3FGPer', 'FG%Opp': 'L3FGPerOpp', 'FTA': 'L3FTA', 'FTAOpp': 'L3FTAOpp',
-             'PF': 'L3PF', 'PFOpp': 'L3PFOpp', 'TOV': 'L3TOV', 'TOVOpp': 'L3TOVOpp'}
+# L3averages.py creates a new field for each game log. It takes a dictionary of stats to take an average of the last
+# 3 games and the name of the new field for the average. Average points for each team in the game are used as an
+# example. Naming conventions are standardized to use 'L3' in front of statistic and 'Opp' at the end of opponent stats.
 
-# Fetch the service account key JSON file path and database URL from environment variables
+# CHANGE STAT TO BE AVERAGED AND NAME OF NEW COLUMN
+stat_dict = {'TmScore': 'L3Pts', 'OppScore': 'L3PtsOpp'}
+
+# Creates connection to Firestore Database
 db = client_setup()
 
-# Specify conference
+# Specify conferences
 conferences = ['ACC', 'Big10', 'Big12', 'BigEast', 'PAC12', 'SEC']
 
 for key, value in stat_dict.items():
     for conference in conferences:
         print(conference)
-        # years to collect averages for
+        # years to collect averages
         years = ['2023']
 
-        # teams to collect averages for
+        # teams to collect averages
         teams = get_teams(conference)
 
         # collect averages for the last three games and add as a new column

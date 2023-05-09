@@ -7,28 +7,35 @@ import numpy as np
 import time
 import warnings
 
+# teamCollection.py is used in data collection. It accesses https://www.sports-reference.com/ and collects data
+# for each game played during specified years and stores the data in the Firestore Database.
+
 warnings.filterwarnings('ignore')
 
+# Creates connection to Firestore Database
 db = client_setup()
 
+# List of conferences
 conferences = ['ACC', 'Big10', 'Big12', 'BigEast', 'PAC12', 'SEC']
 
 for conference in conferences:
-    collection = db.collection(conference)  # opens conference collection
+    # Opens conference collection
+    collection = db.collection(conference)
 
+    # Creates pandas DataFrame
     final_df = pd.DataFrame()
 
-    # list of conference schools
+    # List of conference schools
     schools = get_teams(conference)
 
-    # list of years to collect data from
+    # List of years to collect data
     years = ['2023']
 
     for year in years:
 
         for school in schools:
             # sports-reference limits the number of HTTP calls
-            # automatic break occurs after each conference to refresh call timer
+            # Automatic break occurs after each conference to refresh call timer
             url = f'https://www.sports-reference.com/cbb/schools/{school}/men/{year}-gamelogs.html'
             str(url)
             print(school)
@@ -39,19 +46,19 @@ for conference in conferences:
                 print(f'Could not find data for {school}.')
                 continue
 
-            # locates the game log table
+            # Locates the game log table
             game_log_df = dfs[0]
 
-            # drop rows that have the school header
+            # Drop rows that have the school header
             game_log_df = game_log_df.dropna(thresh=len(game_log_df.columns) - 3)
 
-            # rows that have the column headers
+            # List of rows that have the column headers
             game = game_log_df['G'].isin(['G'])
 
-            # only include win or loss not overtime
+            # Only include win or loss not overtime
             game_log_df["W/L"] = game_log_df["W/L"].astype(str).str[0]
 
-            # list of column names
+            # List of column names
             game_log_df.columns = ['G', 'Date', 'Place', 'Opp', 'Result', 'TmScore',
                                    'OppScore', 'FG', 'FGA', 'FG%', '3PM',
                                    '3PA', '3P%', 'FTM', 'FTA', 'FT%', 'ORB', 'TRB',
@@ -66,15 +73,15 @@ for conference in conferences:
             game_log_df.loc[game_log_df["Place"] == "N", "Place"] = 2
             game_log_df["Place"] = game_log_df["Place"].replace(np.nan, 1)
 
-            # drop empty columns from the DataFrame
+            # Drop empty columns from the DataFrame
             game_log_df.drop(game_log_df.columns[[0, 23]], axis=1, inplace=True)
 
-            # store data in firebase by converting DataFrame to dictionary
+            # Store data in Firestore Database by converting DataFrame to dictionary
             games = game_log_df.to_dict('records')
 
-            # store each game under conference/team/year/date
+            # Store each game under conference/team/year/date
             for game in games:
-                # ignores non-game data
+                # Ignores non-game data
                 if game['Date'] == 'Date':
                     continue
                 else:

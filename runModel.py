@@ -2,7 +2,6 @@ import pickle
 from firestoreClient import client_setup
 import numpy as np
 import pandas as pd
-from sklearn.preprocessing import StandardScaler
 
 
 # Linear Regression model for score predictions and Logistic Regression model for win probability were trained

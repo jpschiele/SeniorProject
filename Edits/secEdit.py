@@ -1,20 +1,19 @@
-import firebase_admin
-from firebase_admin import credentials, firestore
+from firestoreClient import client_setup
 
-# Initialize Firebase app with a service account
-cred = credentials.Certificate("C:/Users/jpsch/OneDrive/Documents/SeniorProject/"
-                               "schieleproject-firebase-adminsdk-m7rjq-33cb8281fc.json")
-firebase_admin.initialize_app(cred)
+# DO NOT RUN multiple times. Multiple runs deletes all data.
 
-# Get a reference to the Firestore database
-db = firestore.client()
+# Creates connection with Firestore Database
+db = client_setup()
 
+# Years to edit data
 years = ['2023']
 
+# List of SEC teams
 teams = ['alabama', 'arkansas', 'auburn', 'florida', 'georgia', 'kentucky',
          'louisiana-state', 'mississippi', 'mississippi-state', 'missouri',
          'south-carolina', 'tennessee', 'texas-am', 'vanderbilt']
 
+# Standardize the naming conventions for teams in the ACC to match the name on sports-reference
 for year in years:
 
     collect = f'{year}GameLog'

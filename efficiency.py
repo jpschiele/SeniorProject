@@ -1,12 +1,16 @@
 from confTeams import get_teams
 from firestoreClient import client_setup
 
-# Fetch the service account key JSON file path and database URL from environment variables
+# efficiency.py calculates eight different efficiency ratings for each team in each game. These ratings are used when
+# training the logistic and linear regression models.
+
+# Creates connection with Firestore Database
 db = client_setup()
 
-# Specify conference
+# Specify conferences
 conferences = ['ACC', 'Big10', 'Big12', 'BigEast', 'PAC12', 'SEC']
 
+# Creates new efficiency fields for each game log
 for conference in conferences:
     print(conference)
     # years to collect averages for
@@ -15,7 +19,7 @@ for conference in conferences:
     # teams to collect averages for
     teams = get_teams(conference)
 
-    # collect averages for the last three games and add as a new column
+    # calculate efficiency ratings for each team in every game
     for year in years:
         print(year)
         collect = f'{year}GameLog'
@@ -27,6 +31,11 @@ for conference in conferences:
             team_ref = db.collection(conference).document(school).collection(collect)
             games = team_ref.stream()
 
+            # possessions = field goal attempts - offensive rebounds + turnovers + 0.475 * free throw attempts
+            # EFG = (field goals made + 0.5 * 3 point attempts) / field goal attempts
+            # TOP = turnovers / possessions
+            # ORB = offensive rebounds / (offensive rebounds + opponent defensive rebounds)
+            # FTR = free throw attempts / field goal attempts
             for game in games:
                 data = game.to_dict()
                 ref = team_ref.document(data['Date'])
