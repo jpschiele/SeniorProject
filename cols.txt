@@ -1,9 +1,0 @@
-'Place', 'L3Pts', 'L3PtsOpp', 'L3TRB', 'L3TRBOpp', 'L33PPer', 'L33PPerOpp', 'L3FGPer', 'L3FGPerOpp',
-              'L3FTA', 'L3FTAOpp', 'L3PF', 'L3PFOpp', 'L3TOV', 'L3TOVOpp', 'AVGPts', 'AVGPtsOpp', 'AVG3PA', 'AVG3PAOpp',
-              'AVGAST', 'AVGASTOpp', 'AVGBLK', 'AVGBLKOpp', 'AVGFGA', 'AVGFGAOpp', 'AVGFTPer', 'AVGFTPerOpp',
-              'AVGSTL', 'AVGSTLOpp', 'AVGORB', 'AVGORBOpp'
-
-
-'TmScore': 'L3Pts', 'OppScore': 'L3PtsOpp', 'TRB': 'L3TRB', 'TRBOpp': 'L3TRBOpp', '3P%': 'L33PPer',
-             '3P%Opp': 'L33PPerOpp', 'FG%': 'L3FGPer', 'FG%Opp': 'L3FGPerOpp', 'FTA': 'L3FTA', 'FTAOpp': 'L3FTAOpp',
-             'PF': 'L3PF', 'PFOpp': 'L3PFOpp', 'TOV': 'L3TOV', 'TOVOpp': 'L3TOVOpp'
