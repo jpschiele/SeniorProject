@@ -19,23 +19,27 @@ This repository contains a college basketball prediction model that utilizes lin
 2. Install the required dependencies:
 
    ```shell
-      pip install -r requirements.txt
+        pip install -r requirements.txt
 
 ## Usage
 
-  Run the prediction model script:
+  1. Run the prediction model script:
 
    ```shell
-      python userInterface.py
+         python userInterface.py
 
-  Choose a conference and two teams from that conference to simulate a game.
+  2. Choose a conference and two teams from that conference to simulate a game.
 
-  The model will provide predicted scores and win probabilities for the given game.
-
+  3. The model will provide predicted scores and win probabilities for the given game.
+  
+  
 ## Dataset
 
-  The prediction model is trained on a comprehensive dataset of college basketball games. The dataset includes game statistics, offensive and defensive ratings,    team information, and other relevant features. The dataset is not included in this repository, but can be found at https://console.firebase.google.com/project/schieleproject/overview
+  The prediction model is trained on a comprehensive dataset of college basketball games. The dataset includes game statistics, offensive and defensive ratings,
+  team information, and other relevant features. The dataset is not included in this repository, but can be found at 
+  https://console.firebase.google.com/project/schieleproject/overview
 
 ## Model Training
 
-  The linear regression and logistic regression models are trained using the scikit-learn library in Python. The training process involves feature selection, data preprocessing, and model fitting. Details of the model training can be found in Model.py.
+  The linear regression and logistic regression models are trained using the scikit-learn library in Python. The training process involves feature selection, data
+  preprocessing, and model fitting. Details of the model training can be found in Model.py.
