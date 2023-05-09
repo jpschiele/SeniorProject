@@ -8,18 +8,23 @@ import warnings
 
 warnings.filterwarnings('ignore')
 
+# Creates connection with Firestore Database
 db = client_setup()
 
+# Used to replace any nan values with the average
 imp = SimpleImputer(missing_values=np.nan, strategy='mean')
 
+# Convert the Firestore documents into a pandas DataFrame
 data = pd.DataFrame()
 
+# List of six major college basketball conferences
 conferences = ['ACC', 'Big10', 'Big12', 'BigEast', 'PAC12', 'SEC']
 
+# Store game data in the DataFrame
 for conference in conferences:
     teams = get_teams(conference)
 
-    years = ['2021', '2022']
+    years = ['2021', '2022', '2023']
 
     for year in years:
         collect = f'{year}GameLog'
@@ -34,6 +39,7 @@ for conference in conferences:
                     game = doc.to_dict()
                     data = data.append(game, ignore_index=True)
 
+# Convert data from str to float
 column_names = ['Date', 'Opp', 'Result']
 for column in data.columns:
     if column not in column_names:
