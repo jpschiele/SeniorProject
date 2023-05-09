@@ -33,15 +33,16 @@ for conference in conferences:
 
             # Count each win and loss
             for doc in data_docs:
-                data = doc.to_dict()
-                if data['Result'] == "W":
-                    win_count += 1
-                    game_count += 1
-                elif data['Result'] == "L":
-                    lose_count += 1
-                    game_count += 1
-                else:
-                    print(f'no win or loss for {data["Date"]}')
+                if doc.id != 'Averages':
+                    data = doc.to_dict()
+                    if data['Result'] == "W":
+                        win_count += 1
+                        game_count += 1
+                    elif data['Result'] == "L":
+                        lose_count += 1
+                        game_count += 1
+                    else:
+                        print(f'no win or loss for {data["Date"]}')
 
         # Verify that all totals are equal
         print(f'{conference} {year}:\n{win_count} wins\n{lose_count} losses\n{game_count} games\n')
