@@ -18,15 +18,15 @@ This repository contains a college basketball prediction model that utilizes lin
 
 2. Install the required dependencies:
 
- ```shell
-  pip install -r requirements.txt
+   ```shell
+      pip install -r requirements.txt
 
 ## Usage
 
   Run the prediction model script:
 
- ```shell
-  python userInterface.py
+   ```shell
+      python userInterface.py
 
   Choose a conference and two teams from that conference to simulate a game.
 
